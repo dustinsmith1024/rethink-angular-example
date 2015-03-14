@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>rethinkcollege</title>
+        <meta name="description" content="playing with rethink and making people rethink college">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style type="text/css">
+
+        </style>
+        <link rel="stylesheet" href="css/core.css">
+    </head>
+    <body>
+
+    <div class="container">
+    	<div class="well">
+        	<h1>rethink</h1>
+       		<p>playing with rethink and making people rethink college</p>
+       		<div class="row">
+       			<div class="col-md-4 col-sm-6 col-xs-6">
+           			<div ng-app="app">
+                        <div ng-controller="TableCtrl">
+                            <div>{{::tables}}</div>
+                            <ul>
+                                <li ng-repeat="table in tables">
+                                    <button ng-click="send(table)">{{table}}</button>
+                                </li>
+                            </ul>
+                            <div>{{connectedTable.name}}</div>
+                            <div ng-repeat="row in data | orderBy:'name'">
+                                <p>{{row}} <button ng-click="remove(row)">remove</button><button ng-click="updateForm(row)">remove</button></p>
+                            </div>
+                            <form ng-show="updating" ng-submit="update()">
+                                Update:
+                                <div class="form-group">
+                                    <label for="update" >Update (JSON String)</label>
+                                    <textarea ng-model="updateEl" id="update" class="form-control"></textarea>
+                                </div>
+                                <input type="submit"/>
+                            </form>
+
+                            <form ng-submit="addNew()">
+                                <div class="form-group">
+                                    <label for="new" >New (JSON String)</label>
+                                    <textarea ng-model="new"id="new" class="form-control"></textarea>
+                                </div>
+                                <input type="submit"/>
+                            </form>
+                        </div>
+                    </div>
+       			</div>
+       		</div>
+		</div>
+	</div>
+
+	<script src="public/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/angular-socket-io/socket.js"></script>
+    <script src="js/bindTable.js"></script>
+	<!-- APP CODE -->
+	<script src="js/concat.js"></script>
+
+    </body>
+</html>
